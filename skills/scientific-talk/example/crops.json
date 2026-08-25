@@ -1,0 +1,96 @@
+{
+ "dpi": 400,
+ "pdfs": {
+  "src": "source_figure.pdf"
+ },
+ "crops": [
+  [
+   "figA_daily_activity",
+   "src",
+   0,
+   [
+    14,
+    8,
+    180,
+    158
+   ]
+  ],
+  [
+   "figB_model_order",
+   "src",
+   0,
+   [
+    183,
+    8,
+    350,
+    158
+   ]
+  ],
+  [
+   "figC_state_usage",
+   "src",
+   0,
+   [
+    353,
+    8,
+    518,
+    158
+   ]
+  ],
+  [
+   "figC_state_usage_b1",
+   "src",
+   0,
+   [
+    353,
+    8,
+    518,
+    158
+   ]
+  ],
+  [
+   "figD_trajectories",
+   "src",
+   0,
+   [
+    14,
+    158,
+    180,
+    308
+   ]
+  ],
+  [
+   "figE_group_difference",
+   "src",
+   0,
+   [
+    183,
+    158,
+    350,
+    308
+   ]
+  ],
+  [
+   "figF_model_estimate",
+   "src",
+   0,
+   [
+    353,
+    158,
+    518,
+    308
+   ]
+  ]
+ ],
+ "whiteout": {
+  "figC_state_usage_b1": [
+   [
+    441,
+    32,
+    515,
+    152
+   ]
+  ]
+ },
+ "detint": {}
+}

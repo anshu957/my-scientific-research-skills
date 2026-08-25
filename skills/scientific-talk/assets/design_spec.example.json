@@ -1,0 +1,101 @@
+{
+ "page": {
+  "w": 720,
+  "h": 405
+ },
+ "fonts": {
+  "headline": {
+   "name": "Arial",
+   "size": 26,
+   "bold": true
+  },
+  "takeaway": {
+   "name": "Arial",
+   "size": 14,
+   "bold": false,
+   "italic": true
+  },
+  "credit": {
+   "name": "Arial",
+   "size": 12,
+   "bold": false
+  },
+  "footer": {
+   "name": "Arial",
+   "size": 10.5,
+   "bold": true
+  },
+  "body": {
+   "name": "Arial",
+   "size": 14,
+   "bold": false
+  }
+ },
+ "colors": {
+  "headline_section": "000000",
+  "headline_claim": "980000",
+  "takeaway": "000000",
+  "credit": "000000",
+  "footer_text": "2B6CB0",
+  "footer_rule": "2B6CB0",
+  "accent_band": "2B6CB0",
+  "citation": "2B6CB0"
+ },
+ "headline": {
+  "x": 6.8,
+  "y": 3.3,
+  "max_w": 700,
+  "line_spacing": 35.9
+ },
+ "body_area": {
+  "x": 8,
+  "y": 46,
+  "w": 704,
+  "h": 260
+ },
+ "takeaway": {
+  "x": 32,
+  "y": 312,
+  "max_w": 640
+ },
+ "credit": {
+  "x": 18,
+  "y": 350
+ },
+ "footer": {
+  "rule_y": 376.0,
+  "rule_h": 2.7,
+  "text_x": 12.2,
+  "text_y": 383.5,
+  "text": "LAB NAME \u2014 INSTITUTION"
+ },
+ "title_slide": {
+  "title": {
+   "x": 43.9,
+   "y": 110.6,
+   "max_w": 650,
+   "size": 28
+  },
+  "band": {
+   "x": 0,
+   "y": 320.9,
+   "w": 720,
+   "h": 84.1
+  },
+  "meta": {
+   "x": 460.0,
+   "y": 336.7,
+   "size": 13.5
+  },
+  "citation_y": 212.0,
+  "logos": []
+ },
+ "observations": [
+  "Neutral starting point: same geometry as a real 16:9 lab deck, no institutional branding.",
+  "Measure your own reference deck with scripts/inspect_pdf.py and overwrite these numbers.",
+  "Personal/house version: assets/local/design_spec.local.json (git-ignored)."
+ ],
+ "deck": {
+  "out": "talk.pptx"
+ }
+}

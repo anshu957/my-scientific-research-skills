@@ -1,0 +1,52 @@
+name: Stamp last-updated dates
+
+# Runs after anything under skills/ is pushed to main. It recomputes each
+# skill's last-updated date from git history, writes it into the .last-updated
+# stamp files and the README badges, commits that back, and creates a dated
+# git tag (skill/YYYY-MM-DD) for any new date.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+
+# Let the built-in token push commits and tags back to the repo.
+permissions:
+  contents: write
+
+jobs:
+  stamp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history, so "last commit per skill" is correct
+
+      - name: Refresh .last-updated stamps and README badges
+        run: python3 .github/scripts/stamp_last_updated.py
+
+      - name: Commit stamp/badge changes (if any)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore: refresh skill last-updated stamps [skip ci]"
+            git push
+          else
+            echo "Nothing to update."
+          fi
+
+      - name: Create dated tags for new dates
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for dir in skills/*/; do
+            name="$(basename "$dir")"
+            date="$(tr -d '[:space:]' < "$dir/.last-updated")"
+            tag="$name/$date"
+            if ! git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+              git tag -a "$tag" -m "$name last updated $date"
+              git push origin "$tag"
+            fi
+          done

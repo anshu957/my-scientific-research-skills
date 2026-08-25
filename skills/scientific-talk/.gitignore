@@ -1,0 +1,14 @@
+# your own branding and house style — never published
+assets/local/
+
+# generated: figure crops, previews, built decks
+figures/
+example/figures/
+example/source_figure.pdf
+example/*.pptx
+*.pptx
+~$*
+
+__pycache__/
+*.pyc
+.DS_Store

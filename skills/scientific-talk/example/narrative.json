@@ -1,0 +1,162 @@
+{
+ "slides": [
+  {
+   "n": 1,
+   "title": "Reading state from continuous behavior",
+   "red_word": "continuous",
+   "authors": "Example, A. & Example, B.",
+   "citation": "Journal of Examples 1, e001 (2026)",
+   "presenter_line": "Lab Meeting | Your Name | 01 January 2027",
+   "notes": "Title. Say in one sentence why you picked this paper, tied to this lab's work."
+  },
+  {
+   "n": 2,
+   "section": "Setup",
+   "headline": "Why the question has not been answerable",
+   "lines": [
+    "The measurement everyone uses is taken twice: at the start and at the end.",
+    "Everything the individual did in between is discarded.",
+    "This paper records all of it — and predicts the endpoint from the middle."
+   ],
+   "notes": "CLAIM — the gap.\nMY READ — this is the promise; say the punchline now so the methods that follow read as evidence rather than as a toll.\nIF SHORT — never cut."
+  },
+  {
+   "n": 3,
+   "section": "Measure",
+   "headline": "One subject, recorded continuously, one day at a time",
+   "takeaway": "Continuous recording turns a two-point comparison into a dense time series per individual.",
+   "credit": "Fig. 1A",
+   "annotations": [
+    "24 h, 1 Hz"
+   ],
+   "panels": {
+    "rows": [
+     [
+      "figA_daily_activity"
+     ]
+    ]
+   },
+   "notes": "CLAIM — what was recorded.\nPOINT — the trough, then the plateau.\nSAY — 24 h, 1 Hz, n = 40.\nIF SHORT — 45 s."
+  },
+  {
+   "n": 4,
+   "section": "Reduce",
+   "headline": "How many components does the representation need",
+   "takeaway": "Variance explained saturates by about eight components, so eight is what the rest of the analysis uses.",
+   "credit": "Fig. 1B",
+   "annotations": [
+    "elbow at ~8"
+   ],
+   "panels": {
+    "rows": [
+     [
+      "figB_model_order"
+     ]
+    ]
+   },
+   "notes": "CLAIM — model order chosen by saturation, not by task performance.\nSAY — >90% by 8 components.\nMY READ — an elbow is a weak criterion; say so.\nIF SHORT — cut, it is on backup."
+  },
+  {
+   "n": 5,
+   "section": "Reduce",
+   "headline": "The first half of every life looks alike",
+   "takeaway": "State usage is stable early; the interesting structure is in the half you cannot see yet.",
+   "credit": "Fig. 1C",
+   "panels": {
+    "rows": [
+     [
+      "figC_state_usage_b1"
+     ]
+    ]
+   },
+   "notes": "Build step 1 of 2 — reveal the early half, ask what they expect next, then advance."
+  },
+  {
+   "n": 6,
+   "section": "Reduce",
+   "headline": "The first half of every life looks alike",
+   "takeaway": "State usage is stable early; the interesting structure is in the half you cannot see yet.",
+   "credit": "Fig. 1C",
+   "panels": {
+    "rows": [
+     [
+      "figC_state_usage"
+     ]
+    ]
+   },
+   "notes": "Build step 2 of 2 — the full record. PAUSE — take two predictions before moving on."
+  },
+  {
+   "n": 7,
+   "section": "Result",
+   "headline": "The two groups separate long before the endpoint",
+   "takeaway": "Trajectories diverge early, and the group difference is already measurable at a fixed early age.",
+   "credit": "Fig. 1D, 1E",
+   "annotations": [
+    "P < 0.0001"
+   ],
+   "panels": {
+    "rows": [
+     [
+      "figD_trajectories",
+      "figE_group_difference"
+     ]
+    ]
+   },
+   "notes": "CLAIM — early separation.\nPOINT — where the two colours part, then the two means.\nSAY — P < 0.0001 at fixed age.\nPAUSE — ask what would convince them this is not circular."
+  },
+  {
+   "n": 8,
+   "section": "Predict",
+   "headline": "A model estimates the endpoint from the middle at R = 0.94",
+   "takeaway": "Held-out estimates track the truth closely — but the model was trained on the endpoint, so that is what it measures.",
+   "credit": "Fig. 1F",
+   "panels": {
+    "rows": [
+     [
+      "figF_model_estimate"
+     ]
+    ]
+   },
+   "notes": "CLAIM — the payoff.\nSAY — R = 0.94, leave-one-subject-out.\nMY READ — accuracy is not mechanism.\nDELIVER — fast, do not pause here."
+  },
+  {
+   "n": 9,
+   "section": "",
+   "headline": "The middle of the record carries the endpoint",
+   "bullets": [
+    "Continuous recording, one subject at a time, for the whole interval.",
+    "Eight components summarize a day; a life becomes a trajectory.",
+    "Groups separate early, before any endpoint is observable.",
+    "A held-out model estimates the endpoint at R = 0.94."
+   ],
+   "notes": "Summary. The headline is the assertion the talk earned — not the word 'Summary'."
+  },
+  {
+   "n": 10,
+   "section": "",
+   "headline": "For discussion: what this design can and cannot support",
+   "lines": [
+    "The group label is retrospective; nothing here is an intervention.",
+    "One cohort, one site — the model order may not transfer.",
+    "For us: is the win the timescale, or the representation?"
+   ],
+   "notes": "Parking lot. Say 'hold that — it's on my last slide' during the talk."
+  },
+  {
+   "n": 11,
+   "section": "Backup",
+   "headline": "Why eight components?",
+   "takeaway": "Variance explained versus model order, with the elbow marked.",
+   "credit": "Fig. 1B",
+   "panels": {
+    "rows": [
+     [
+      "figB_model_order"
+     ]
+    ]
+   },
+   "notes": "Shown on request."
+  }
+ ]
+}
