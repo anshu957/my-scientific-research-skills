@@ -10,6 +10,7 @@ A collection of [Claude Code](https://docs.claude.com/en/docs/claude-code) **Age
 | [`new-experiment`](skills/new-experiment) | Scaffold a self-contained Lab-Standard `experiments/exp-NNNN_slug/` run (config + `run.py` + provenance manifest + MLflow + hypothesis README) and register it in `experiments/INDEX.md`. | ![](https://img.shields.io/badge/updated-2026--07--14-blue) |
 | [`new-project`](skills/new-project) | Scaffold a new scientific project from the Lab Standard template (`src/` package, `experiments/`, `notebooks/`, `data/`, `docs/decisions/`, `AGENTS.md`, `justfile`, `environment.yml`, MLflow + provenance helpers). | ![](https://img.shields.io/badge/updated-2026--07--14-blue) |
 | [`scientific-talk`](skills/scientific-talk) | Build a figure-forward `.pptx` talk (journal club, lab meeting, conference, thesis committee): one claim per slide, arc-driven, matched to a house style. | ![](https://img.shields.io/badge/updated-2026--08--21-blue) |
+| [`write-like-me`](skills/write-like-me) | Write anything in Anshul's own voice — plain, Feynman-style, intuition-first, zero AI slop: Slack replies, emails, WORKLOG/README prose, captions, abstracts, PR descriptions. De-slops and tone-matches existing drafts too. | ![](https://img.shields.io/badge/updated-2026--09--18-blue) |
 
 Each skill folder also carries a `.last-updated` stamp (ISO date) so the date travels with the skill.
 
@@ -23,7 +24,7 @@ git clone https://github.com/anshu957/my-scientific-research-skills.git
 cp -r my-scientific-research-skills/skills/* ~/.claude/skills/
 ```
 
-Restart Claude Code (or start a new session) and the skills become available as `/figure-hygiene`, `/new-experiment`, `/new-project`, `/scientific-talk`.
+Restart Claude Code (or start a new session) and the skills become available as `/figure-hygiene`, `/new-experiment`, `/new-project`, `/scientific-talk`, `/write-like-me`.
 
 ## License
 
