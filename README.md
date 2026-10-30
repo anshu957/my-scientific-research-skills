@@ -6,7 +6,7 @@ A collection of [Claude Code](https://docs.claude.com/en/docs/claude-code) **Age
 
 | Skill | What it does | Last updated |
 |-------|--------------|:---:|
-| [`figure-hygiene`](skills/figure-hygiene) | Produce clean, publication-quality scientific figures: one title = the key question, only necessary labels, vector PDF into `figures/` with a journal rcParams style and colorblind-safe palette; all detail lives in a synced `figure_captions.md`. | ![](https://img.shields.io/badge/updated-2026--10--30-blue) |
+| [`figure-hygiene`](skills/figure-hygiene) | Make one clean scientific figure per question, for screen: the plot form is reasoned from the data, the question is the bold title, only necessary labels, Arial, colorblind-safe palette, vector PDF into `figures/`; all detail lives in a synced `figure_captions.md`. Works from a bare "here's my data, make a figure" prompt. | ![](https://img.shields.io/badge/updated-2026--10--30-blue) |
 | [`new-experiment`](skills/new-experiment) | Scaffold a self-contained Lab-Standard `experiments/exp-NNNN_slug/` run (config + `run.py` + provenance manifest + MLflow + hypothesis README) and register it in `experiments/INDEX.md`. | ![](https://img.shields.io/badge/updated-2026--08--25-blue) |
 | [`new-project`](skills/new-project) | Scaffold a new scientific project from the Lab Standard template (`src/` package, `experiments/`, `notebooks/`, `data/`, `docs/decisions/`, `AGENTS.md`, `justfile`, `environment.yml`, MLflow + provenance helpers). | ![](https://img.shields.io/badge/updated-2026--08--25-blue) |
 | [`scientific-talk`](skills/scientific-talk) | Build a figure-forward `.pptx` talk (journal club, lab meeting, conference, thesis committee): one claim per slide, arc-driven, matched to a house style. | ![](https://img.shields.io/badge/updated-2026--08--25-blue) |
@@ -16,15 +16,53 @@ Each skill folder also carries a `.last-updated` stamp (ISO date) so the date tr
 
 ## Install
 
-Clone into your Claude Code skills directory:
+Skills are independent — install only the ones you want.
+
+### One skill (Claude Code)
+
+Set `SKILL` to any folder name from the table above:
+
+```bash
+SKILL=figure-hygiene
+git clone --depth 1 --filter=blob:none --sparse \
+  https://github.com/anshu957/my-scientific-research-skills.git /tmp/research-skills
+git -C /tmp/research-skills sparse-checkout set "skills/$SKILL"
+mkdir -p ~/.claude/skills
+cp -r "/tmp/research-skills/skills/$SKILL" ~/.claude/skills/
+rm -rf /tmp/research-skills
+```
+
+This downloads only that skill. To install it for one project instead of for you,
+copy it into `<project>/.claude/skills/` and commit it there.
+
+### All skills (Claude Code)
 
 ```bash
 git clone https://github.com/anshu957/my-scientific-research-skills.git
-# copy (or symlink) the skills you want into ~/.claude/skills/
+mkdir -p ~/.claude/skills
 cp -r my-scientific-research-skills/skills/* ~/.claude/skills/
 ```
 
-Restart Claude Code (or start a new session) and the skills become available as `/figure-hygiene`, `/new-experiment`, `/new-project`, `/scientific-talk`, `/write-like-me`.
+### Claude.ai / Claude desktop
+
+Zip the skill folder (the zip must contain the folder, e.g. `figure-hygiene/SKILL.md`)
+and upload it under **Settings → Capabilities → Skills**.
+
+### Use
+
+Start a new Claude Code session. Claude loads a skill automatically when your request
+matches it (e.g. "here's my data, make a figure"), or call it directly as
+`/figure-hygiene`, `/new-experiment`, … .
+
+### Update
+
+Re-run the same install commands; `cp -r` overwrites the old copy.
+
+### Requirements
+
+- `figure-hygiene`: Python with matplotlib (+ seaborn for heatmaps), the Arial font, and
+  PyMuPDF (`pip install pymupdf`) or poppler for its `qa.py` check.
+- `new-experiment`, `new-project`: designed for the [Lab Standard](https://github.com/anshu957/lab-standard) layout.
 
 ## License
 
