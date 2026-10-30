@@ -7,9 +7,10 @@ Usage:
 
 For each PDF in DIR/figures/ it:
   - renders page 1 to a PNG in DIR/figures/_figqa/  (throwaway; --clean removes it)
-  - reports the physical size and flags figures too wide/narrow for a journal column
+  - reports the physical size (no width rule: single figures are sized for screen)
+  - flags any embedded font that is not Arial (e.g. a DejaVu Sans fallback)
   - flags rasters (.png/.jpg) sitting in figures/  (hygiene: vector PDF only)
-  - flags any PDF with no entry in figure_captions.md
+  - flags any PDF with no entry in figure_captions.md (looked for in DIR, then figures/)
 
 A figure you have not looked at is not done. After this runs, OPEN the PNGs in
 _figqa/ and check each one: nothing clipped, every glyph legible at print size,
@@ -17,10 +18,8 @@ colors distinguishable in grayscale.
 
 Exit code is nonzero if any rule is violated, so it can gate a build.
 """
-import sys, re
+import sys
 from pathlib import Path
-
-COL_MIN_IN, COL_MAX_IN = 3.0, 7.2  # single ~3.3in .. double ~6.9in, with slack
 
 
 def render(pdf: Path, out_dir: Path):
@@ -44,6 +43,20 @@ def render(pdf: Path, out_dir: Path):
     return None, None, None
 
 
+def fonts(pdf: Path):
+    """Embedded font names (subset prefix stripped), or None if no reader."""
+    try:
+        import fitz
+        names = {f[3] for page in fitz.open(pdf) for f in page.get_fonts()}
+    except ImportError:
+        import subprocess, shutil
+        if not shutil.which("pdffonts"):
+            return None
+        out = subprocess.run(["pdffonts", str(pdf)], capture_output=True, text=True).stdout
+        names = {l.split()[0] for l in out.splitlines()[2:] if l.strip()}
+    return {n.split("+", 1)[-1] for n in names}
+
+
 def main():
     args = [a for a in sys.argv[1:]]
     clean = "--clean" in args
@@ -65,7 +78,9 @@ def main():
 
     pdfs = sorted(figs.glob("*.pdf"))
     strays = sorted(figs.glob("*.png")) + sorted(figs.glob("*.jpg")) + sorted(figs.glob("*.jpeg"))
-    cap = figs / "figure_captions.md"
+    # captions live in the experiment folder; accept figures/ too
+    cap = next((p for p in (base / "figure_captions.md", figs / "figure_captions.md")
+                if p.exists()), base / "figure_captions.md")
     cap_txt = cap.read_text() if cap.exists() else ""
 
     problems = 0
@@ -77,9 +92,10 @@ def main():
         line = f"  {pdf.name}"
         if w:
             line += f"  {w:.2f} x {h:.2f} in"
-            if not (COL_MIN_IN <= w <= COL_MAX_IN):
-                line += f"  ! width {w:.2f}in outside journal-column range " \
-                        f"({COL_MIN_IN}-{COL_MAX_IN}in)"; problems += 1
+        fs = fonts(pdf)
+        bad = sorted(f for f in (fs or ()) if not f.startswith("Arial"))
+        if bad:
+            line += f"  ! non-Arial font(s): {', '.join(bad)}"; problems += 1
         if pdf.name not in cap_txt:
             line += "  ! NO caption entry"; problems += 1
         if png:
@@ -93,7 +109,7 @@ def main():
 
     print(f"\nLOOK at the PNGs in {qa_dir.relative_to(base) if qa_dir.is_relative_to(base) else qa_dir}"
           f" — a figure you have not looked at is not done.")
-    print(f"clean up with:  python3 {Path(__file__).name} --clean {base}")
+    print(f"clean up with:  {sys.executable} {Path(__file__)} --clean {base}")
     print(f"\n{'PASS — no rule violations' if problems == 0 else f'{problems} problem(s) to fix'}")
     return 1 if problems else 0
 
