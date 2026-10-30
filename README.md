@@ -33,4 +33,4 @@ For another skill, replace `figure-hygiene` with its name. Run the same command 
 
 ## License
 
-Personal research tooling. Reuse freely with attribution.
+[MIT](LICENSE)
